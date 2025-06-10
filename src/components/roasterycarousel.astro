@@ -1,0 +1,86 @@
+---
+const images = [
+  "/img/coffeeweight.webp",
+  "/img/coffeesack.webp",
+  "/img/coffeeroast.webp",
+  "/img/coffeebags.webp",
+];
+---
+
+<div class="carousel">
+  <div class="track">
+    <!-- Sætter et array af billeder ind,
+     .map() går igennem hvert billede i array'et
+     for hvert img bliver der oprettet et img element med src og alt attributter samt pålagt klassen slide 
+        -->
+    {images.map((src) => <img src={src} alt="Billede" class="slide" />)}
+
+    <!--Vi gentager billederne i track'en, så der er 8 billeder i alt
+    derved køre den uendeligt fordi at når sidste billede vises, er det første billede allerede klar til at glide ind igen-->
+    {images.map((src) => <img src={src} alt="Billede" class="slide" />)}
+  </div>
+</div>
+
+<style>
+  /* Styler selve containeren omkring billederne, som hviser et billede af gangen*/
+  .carousel {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 2/3; /* Holder forholdet mellem bredde og højde */
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+
+  /* Sætter billederne i en flexbox, så de står ved siden af hinanden, med en infinte scroll 
+    Scroll animation varer 28 sekunder, 7 sekunder pr. billede */
+  .track {
+    display: flex;
+    gap: 50px;
+    animation: scroll 28s linear infinite;
+  }
+
+  /* Styler selve de enkelte billeder - object fit sørger for at billedet fylder hele containeren*/
+  .slide {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 2/3;
+    height: auto;
+    object-fit: cover;
+
+    /* Sørger for at billederne ikke skalerer ned når de kommer ind i containeren */
+    flex-shrink: 0;
+    /* Sørger for at billederne ikke skalerer op når de kommer ind i containeren */
+    display: block;
+  }
+
+  /* Sætter animationen til at køre fra 0% til 100%, og sætter den til at køre i loop */
+  @keyframes scroll {
+    /* Første billede - Startposition - første billede vises */
+    0%,
+    20% {
+      transform: translateX(0);
+    }
+
+    /* andet billede kommer ind ved at flytte det hele 100% mod højre, da der er 50px gab mellem billederne skal dette regnes med så den ender på den rigtige position */
+    25%,
+    45% {
+      transform: translateX(calc(-100% - 50px));
+    }
+
+    50%,
+    70% {
+      transform: translateX(calc(-200% - 100px));
+    }
+
+    75%,
+    95% {
+      transform: translateX(calc(-300% - 150px));
+    }
+
+    100% {
+      transform: translateX(calc(-400% - 200px));
+    }
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Menu from "../components/menu.astro";
+import Footer from "../components/footer.astro";
+import Carousel from "../components/roasterycarousel.astro";
+import SubpageHero from "../components/subpagehero.astro";
+import Contactform from "../components/contactform.astro";
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/img/icons/logo.ico" type="image/x-icon" />
+  <meta name="generator" content="Astro" />
+  <title>Om os | Yellow Bird Coffee</title>
+</head>
+
+<Layout>
+  <header>
+    <Menu />
+    <SubpageHero
+      src="/img/omoshero.webp"
+      alt="Om os hero sektion"
+      header="Om os"
+    />
+  </header>
+  <main>
+    <p class="intro margin">
+      Her kan du læse om vores kaffebar ved Amager Strand, vores risteri i
+      Hvidovre, hvordan vi arbejder med kaffeabonnementer, events og
+      bæredygtighed – og møde teamet bag kaffen.
+    </p>
+    <article class="greengrid_1-1">
+      <div class="VoresVærdier_text">
+        <h3>Vores Værdier</h3>
+        <p>
+          Bæredygtighed er kernen i alt, hvad vi gør. Hos Yellow Bird Coffee
+          tager vi ansvar – fra den måde vi indkøber vores kaffebønner på, til
+          hvordan vi minimerer spild i vores ristning og emballering. Vi går
+          målrettet efter at sikre, at hver eneste kop kaffe ikke kun smager
+          fantastisk, men også afspejler en bevidst indsats for en mere
+          retfærdig og bæredygtig kaffeindustri.
+        </p>
+        <p>
+          Vi samarbejder tæt med producenter, betaler fair priser og vælger
+          vores leverandører med omhu – alt sammen for at støtte en gennemsigtig
+          forsyningskæde, hvor både mennesker og miljø bliver taget alvorligt.
+        </p>
+      </div>
+      <div><img src="/img/plantage2.webp" alt="Kaffeplantage" /></div>
+    </article>
+    <article class="grid_1-1 margin">
+      <div class="coffeebar_text">
+        <h3>Vores Kaffebar</h3>
+
+        <p>
+          På vores risteri i Hvidovre rister vi kaffe hver onsdag og fredag for
+          at sikre friskristede bønner på hylderne. Vi laver det meste af vores
+          mad og kager fra bunden og serverer friskbrygget kaffe med udsigt over
+          Amager Strand. Du finder vores hyggelige kaffebar lige ved Amager
+          Strandpark – perfekt til en pause under strandturen eller som take
+          away.
+        </p>
+        <p>
+          Navnet Yellow Bird Coffee stammer fra den gule sangfugl i Sydamerika,
+          som beskytter kaffebønnerne mod insekter. Vi arbejder for
+          bæredygtighed og ordentlige vilkår for de bønder, vi handler med – ved
+          altid at betale en fair pris for de grønne bønner.
+        </p>
+      </div>
+      <div class="coffeebar_image">
+        <img src="/img/coffeebar.webp" alt="Kaffebaren" />
+      </div>
+    </article>
+    <article class="grid_1-1 margin">
+      <div class="roastery_text">
+        <h3>Vores Risteri</h3>
+
+        <p>
+          På vores risteri i Hvidovre rister vi kaffe hver onsdag og fredag for
+          at sikre friskristede bønner på hylderne. Vi arbejder med stor
+          præcision for at fremhæve hver kaffes unikke karakter – fra bønnetype
+          og forarbejdning til dyrkningsmetode. Vores sortiment følger
+          høstsæsonerne, så du altid får kaffe i topform.
+        </p>
+        <p>
+          Det meste af vores kaffe køber vi direkte fra oprindelseslandene
+          gennem tætte relationer til producenter. Det sikrer både høj kvalitet
+          og fair vilkår for dem, der dyrker kaffen. Vi rister på vores Giesen
+          W15A – The Dutchess – i små partier på 9–12 kg for at sikre optimal
+          smag og konsistens. Vi går ikke på kompromis.
+        </p>
+      </div>
+      <Carousel />
+    </article>
+    <article class="yellowgrid_1-1">
+      <div class="hirebarista_text">
+        <h3>Hyr en barista</h3>
+        <p>
+          Vores baristaer er erfarne kaffeentusiaster, der brænder for både god
+          kaffe og gode gæsteoplevelser. Vi behandler dit event som vores eget
+          og tilpasser os dine behov – uanset om det er en intim sammenkomst
+          eller et større arrangement.
+        </p>
+        <p>
+          Vi leverer alt fra bønne til bryg: friskristet kaffe, direkte fra
+          oprindelseslandene, serveret med præcision og passion.
+        </p>
+        <p>
+          Vi elsker kaffe – og endnu mere at dele den kærlighed med dine gæster.
+        </p>
+      </div>
+      <img src="/img/hirebarista.webp" alt="Barista" />
+    </article>
+    <Contactform />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .intro {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  article {
+    margin-bottom: 100px;
+  }
+
+  .greengrid_1-1 {
+    background-color: var(--green-color);
+    padding: 4vh;
+    color: var(--white-color);
+  }
+
+  .yellowgrid_1-1 {
+    background-color: var(--yellow-color);
+    padding: 4vh;
+    color: var(--black-color);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding-top: 5vh;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  @media (min-width: 768px) {
+    .intro {
+      width: 50vw;
+    }
+
+    .grid_1-1 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4vw;
+    }
+
+    .coffeebar_text {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .coffeebar_image {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .greengrid_1-1 {
+      display: grid;
+      grid-template-columns: 5fr 3fr;
+      gap: 20px;
+      padding: 0;
+    }
+
+    .yellowgrid_1-1 {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      padding: 0;
+      gap: 40px;
+    }
+
+    .VoresVærdier_text {
+      padding: 4vw 10vw 4vw 10vw;
+    }
+
+    .hirebarista_text {
+      grid-column: 2;
+      grid-row: 1;
+      padding: 4vw 10vw 4vw 40px;
+    }
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      padding: 0;
+      margin: 0;
+    }
+  }
+</style>

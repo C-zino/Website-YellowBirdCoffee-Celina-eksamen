@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato/Lato-Regular.woff2") format("woff2"), url("/fonts/Lato/Lato-Regular.woff") format("woff"), url("/fonts/Lato/Lato-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "LatoBold";
+  src: url("/fonts/Lato/Lato-Bold.woff2") format("woff2"), url("/fonts/Lato/Lato-Bold.woff") format("woff"), url("/fonts/Lato/Lato-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Regular.woff2") format("woff2"), url("/fonts/Montserrat/Montserrat-Regular.woff") format("woff"), url("/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("/fonts/Montserrat/Montserrat-Medium.woff2") format("woff2"), url("/fonts/Montserrat/Montserrat-Medium.woff") format("woff"), url("/fonts/Montserrat/Montserrat-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MontserratSemiBold";
+  src: url("/fonts/Montserrat/Montserrat-SemiBold.woff2") format("woff2"), url("/fonts/Montserrat/Montserrat-SemiBold.woff") format("woff"), url("/fonts/Montserrat/Montserrat-SemiBold.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  /* COLORS */
+  --green-color: #424c37;
+  --yellow-color: #fdcc40;
+  --yellow-light-color: rgb(253, 204, 64, 0.7);
+  --background-color: #fffcf5;
+  --black-color: #121212;
+  --white-color: #fdfcfe;
+  --beige-color: #f4f0e7;
+}
+
+.margin {
+  margin: 0 8vw;
+}
+
+/* FONTS MOBILE */
+h1 {
+  font-family: "LatoBold";
+  font-size: 31px;
+}
+h2 {
+  font-family: "LatoBold";
+  font-size: 24px;
+}
+h3 {
+  font-family: "LatoBold";
+  font-size: 19px;
+}
+
+h4 {
+  font-family: "Lato";
+  font-size: 16px;
+}
+
+h5 {
+  font-family: "MontserratMedium";
+  font-size: 15px;
+}
+
+p {
+  font-family: "Montserrat";
+  font-size: 15px;
+  line-height: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+a {
+  font-family: "MontserratSemiBold";
+  font-size: 15px;
+  text-decoration: none;
+}
+
+/* GENERAL RULES */
+html {
+  background-color: var(--background-color);
+}
+
+@media (min-width: 768px) {
+  /* FONTS DESKTOP */
+  h1 {
+    font-family: "LatoBold";
+    font-size: 70px;
+  }
+  h2 {
+    font-family: "LatoBold";
+    font-size: 40px;
+  }
+  h3 {
+    font-family: "LatoBold";
+    font-size: 36px;
+  }
+
+  h4 {
+    font-family: "Lato";
+    font-size: 30px;
+  }
+
+  h5 {
+    font-family: "MontserratMedium";
+    font-size: 23px;
+  }
+
+  h6 {
+    font-family: "MontserratSemiBold";
+    font-size: 20px;
+  }
+
+  p {
+    font-family: "Montserrat";
+    font-size: 17px;
+    line-height: 35px;
+  }
+  a {
+    font-family: "montserratSemiBold";
+    font-size: 17px;
+    text-decoration: none;
+  }
+
+  .priser {
+    font-family: "Montserrat";
+    font-size: 15px;
+  }
+
+  .margin {
+    margin: 0 10vw;
+  }
+}

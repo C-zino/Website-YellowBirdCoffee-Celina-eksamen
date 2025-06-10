@@ -1,0 +1,390 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MenuBlack from "../components/menublack.astro";
+import CTA from "../components/SquareCTA2.astro";
+import Footer from "../components/footer.astro";
+
+// Bruger getStaticPaths til at generere statiske ruter for hver bruger.
+export async function getStaticPaths() {
+  /// Laver et array af brugernavne, som skal bruges til at generere statiske ruter.
+  /// Disse brugernavne skal matche de brugere, der er i vores data.
+  return [
+    { params: { username: "Per" } },
+    { params: { username: "Line" } },
+    { params: { username: "Jens" } },
+    { params: { username: "Gitte" } },
+  ];
+}
+
+// Jeg har lavet et simpelt arrey med brugere, som indeholder deres oplysninger.
+const { username } = Astro.params;
+
+const users = [
+  {
+    username: "Per",
+    fullname: "Per Hansen",
+    address: "Bækgade 12, 8000 Aarhus",
+    email: "per.hansen@mail.dk",
+    phone: "56 56 56 XX",
+    subscription: "Lysristet",
+    frequency: "Hver anden uge",
+    amount: "260 gram",
+    bags: 1,
+    created: "01-03-2025",
+    nextDelivery: "14-06-2025",
+    deliveries: [
+      { date: "31-05-2025", amount: "260g", status: "Leveret" },
+      { date: "17-05-2025", amount: "260g", status: "Leveret" },
+      { date: "03-05-2025", amount: "260g", status: "Leveret" },
+    ],
+    payments: [
+      { date: "31-05-2025", amount: "89 DKK", status: "Betalt" },
+      { date: "17-05-2025", amount: "89 DKK", status: "Betalt" },
+      { date: "03-05-2025", amount: "89 DKK", status: "Betalt" },
+    ],
+    payment: {
+      method: {
+        type: "Kreditkort",
+        last4: "1234",
+        expires: "04/27",
+      },
+      nextPaymentDate: "14-06-2025",
+    },
+  },
+  {
+    username: "Line",
+    fullname: "Line Jensen",
+    address: "Skovvej 34, 4000 Roskilde",
+    email: "line.jensen@mail.dk",
+    phone: "78 78 78 XX",
+    subscription: "Mørkristet",
+    frequency: "Hver måned",
+    amount: "1000 gram",
+    bags: 2,
+    created: "15-02-2025",
+    nextDelivery: "01-06-2025",
+    deliveries: [
+      { date: "01-05-2025", amount: "1000g", status: "Leveret" },
+      { date: "01-04-2025", amount: "1000g", status: "Leveret" },
+    ],
+    payments: [
+      { date: "01-05-2025", amount: "199 DKK", status: "Betalt" },
+      { date: "01-04-2025", amount: "199 DKK", status: "Betalt" },
+    ],
+    payment: {
+      method: {
+        type: "Kreditkort",
+        last4: "5678",
+        expires: "12/26",
+      },
+      nextPaymentDate: "01-06-2025",
+    },
+  },
+  {
+    username: "Jens",
+    fullname: "Jens Larsen",
+    address: "Parkalle 7, 9000 Aalborg",
+    email: "jens.larsen@mail.dk",
+    phone: "34 34 34 XX",
+    subscription: "Blandt selv (Nilza & Siko)",
+    frequency: "Hver anden måned",
+    amount: "260 gram",
+    bags: 1,
+    created: "20-04-2025",
+    nextDelivery: "20-06-2025",
+    deliveries: [{ date: "20-04-2025", amount: "260g", status: "Leveret" }],
+    payments: [{ date: "20-04-2025", amount: "89 DKK", status: "Betalt" }],
+    payment: {
+      method: {
+        type: "Kreditkort",
+        last4: "9012",
+        expires: "08/28",
+      },
+      nextPaymentDate: "20-06-2025",
+    },
+  },
+  {
+    username: "Gitte",
+    fullname: "Gitte Sørensen",
+    address: "Strandvej 22, 5000 Odense",
+    email: "gitte.sorensen@mail.dk",
+    phone: "90 90 90 XX",
+    subscription: "Mellemristet",
+    frequency: "Hver måned",
+    amount: "1000 gram",
+    bags: 2,
+    created: "10-05-2025",
+    nextDelivery: "10-06-2025",
+    deliveries: [{ date: "10-05-2025", amount: "1000g", status: "Leveret" }],
+    payments: [{ date: "10-05-2025", amount: "199 DKK", status: "Betalt" }],
+    payment: {
+      method: {
+        type: "Kreditkort",
+        last4: "3456",
+        expires: "03/27",
+      },
+      nextPaymentDate: "10-06-2025",
+    },
+  },
+];
+
+// Find bruger hvor fornavn matcher (case-insensitive)
+const user = users.find(
+  (u) => u.username.toLowerCase() === username.toLowerCase()
+);
+---
+
+<Layout>
+  <header>
+    <MenuBlack />
+  </header>
+  <main>
+    {
+      user ? (
+        <article>
+          <h1>Profil</h1>
+          <nav class="profil-menu">
+            <a href="#profil">Profil</a>
+            <a href="#abonnement">Abonnement</a>
+            <a href="#historik">Historik</a>
+            <a href="#betaling">Betalingsmuligheder</a>
+            <a href="#muligheder">Andre abonnement muligheder</a>
+          </nav>
+          <section id="profil">
+            <h2>{user.fullname}</h2>
+            <ul>
+              <li>
+                <strong>Adresse:</strong> {user.address}
+              </li>
+              <li>
+                <strong>E-mail:</strong> {user.email}
+              </li>
+              <li>
+                <strong>Telefon:</strong> {user.phone}
+              </li>
+            </ul>
+            <CTA ctaText="Rediger oplysninger" ctaLink="#" />
+          </section>
+
+          <section id="abonnement">
+            <h3>Abonnement detaljer</h3>
+            <ul>
+              <li>
+                <strong>Abonnement:</strong> {user.subscription}
+              </li>
+              <li>
+                <strong>Leveringsfrekvens:</strong> {user.frequency}
+              </li>
+              <li>
+                <strong>Mængde:</strong> {user.amount}
+              </li>
+              <li>
+                <strong>Antal poser:</strong> {user.bags}
+              </li>
+              <li>
+                <strong>Oprettet:</strong> {user.created}
+              </li>
+              <li>
+                <strong>Næste levering:</strong> {user.nextDelivery}
+              </li>
+            </ul>
+            <CTA ctaText="Ændre abonnement" ctaLink="#" />
+          </section>
+
+          <section id="historik">
+            <h3>Historik</h3>
+            <p>
+              <strong>Seneste leveringer:</strong>
+            </p>
+            <ul>
+              {user.deliveries.map((delivery) => (
+                <li>
+                  {delivery.date} - {delivery.amount} - {delivery.status}
+                </li>
+              ))}
+            </ul>
+            <p>
+              <strong>Betalinger:</strong>
+            </p>
+            <ul>
+              {user.payments.map((payment) => (
+                <li>
+                  {payment.date} - {payment.amount} - {payment.status}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section id="betaling">
+            <h3>Betalingsmuligheder</h3>
+            <ul>
+              <li>
+                <strong>Nuværende betalingsmetode:</strong>{" "}
+                {user.payment.method.type} (**** **** ****{" "}
+                {user.payment.method.last4})
+              </li>
+              <li>
+                <strong>Udløbsdato:</strong> {user.payment.method.expires}
+              </li>
+              <li>
+                <strong>Næste betaling:</strong> {user.payment.nextPaymentDate}
+              </li>
+            </ul>
+
+            <CTA ctaText="Skift betalingsmetode" ctaLink="#" />
+          </section>
+
+          <section id="muligheder">
+            <h3>Andre abonnement muligheder</h3>
+            <CTA ctaText="Sæt abonnement på pause" ctaLink="#" />
+            <CTA
+              ctaText="Annuller abonnement"
+              ctaLink="#"
+              id="cancel-supscription"
+            />
+
+            <div id="cancel-popup" class="popup hide">
+              <div class="popup-content">
+                <p>Er du sikker på, du vil annullere dit abonnement?</p>
+                <CTA ctaText="Bekræft" ctaLink="#" id="confirm-cancel" />
+                <CTA ctaText="Fortryd" ctaLink="#" id="close-popup" />
+              </div>
+            </div>
+          </section>
+        </article>
+      ) : (
+        <article>
+          <h1>Bruger ikke fundet</h1>
+          <p>Der er ingen bruger med brugernavn "{username}".</p>
+        </article>
+      )
+    }
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    margin-top: 120px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 100px;
+  }
+
+  .profil-menu {
+    display: flex;
+    gap: 1rem;
+
+    flex-wrap: wrap;
+    margin: 2rem 0 2.5rem 0;
+  }
+
+  .profil-menu a {
+    text-decoration: none;
+    color: var(--black-color);
+    padding: 0.5rem 1.2rem;
+    transition: color 0.2s;
+  }
+
+  .profil-menu a:hover {
+    color: var(--yellow-color);
+  }
+
+  section {
+    border: 1px solid var(--green-color, #5e7c6a);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 30px;
+
+    /* For at sikre at den hopper ned til rigtige sektion, 
+    uden at blive forstyrret af den margin der er på toppen */
+    scroll-margin-top: 140px;
+  }
+
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+
+  .popup.hide {
+    display: none;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+
+    text-align: center;
+  }
+
+  li {
+    font-family: "Montserrat";
+    font-size: 15px;
+    line-height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 1200px) {
+    main {
+      margin-top: 160px;
+      margin-left: 15vw;
+      margin-right: 15vw;
+    }
+
+    .profil-menu {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script is:inline>
+  window.addEventListener("DOMContentLoaded", () => {
+    const cancel = document.getElementById("cancel-supscription");
+    const popup = document.getElementById("cancel-popup");
+    const close = document.getElementById("close-popup");
+    const confirm = document.getElementById("confirm-cancel");
+
+    // fjern hide klasse når brugeren klikker på "Annuller abonnement"
+    if (cancel && popup) {
+      cancel.addEventListener("click", () => {
+        popup.classList.remove("hide");
+      });
+    }
+
+    // tilføj hide klasse når brugeren klikker på "Bekræft"
+    if (confirm) {
+      confirm.addEventListener("click", () => {
+        popup.classList.add("hide");
+
+        // sender en besked til brugeren om annullering
+        alert("Dit abonnement er blevet annulleret.");
+      });
+    }
+
+    // tilføj hide klasse når brugeren klikker på "Fortryd"
+    if (close) {
+      close.addEventListener("click", () => {
+        popup.classList.add("hide");
+      });
+    }
+  });
+</script>

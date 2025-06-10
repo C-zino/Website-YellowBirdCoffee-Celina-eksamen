@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Menu from "../components/menu.astro";
+import Footer from "../components/footer.astro";
+import SubpageHero from "../components/subpagehero.astro";
+import Category from "../components/category.astro";
+import Subscriptionsection from "../components/subscriptionsection.astro";
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/img/icons/logo.ico" type="image/x-icon" />
+  <meta name="generator" content="Astro" />
+  <title>Køb kaffe | Yellow Bird Coffee</title>
+</head>
+
+<Layout>
+  <header>
+    <Menu />
+    <SubpageHero
+      src="/img/koebkaffe.webp"
+      alt="Køb kaffe hero sektion"
+      header="Køb kaffe"
+    />
+  </header>
+
+  <main>
+    <div class="grid_1-1 margin">
+      <div class="levering">
+        <img src="/img/icons/leveringstid.webp" alt="Fragtbil" />
+        <p>Leveringstid indenfor 3 hverdage</p>
+      </div>
+      <div class="fragt">
+        <img src="/img/icons/Fragt.webp" alt="Fragtkasse" />
+        <p>Gratis levering ved køb for over 500kr</p>
+      </div>
+    </div>
+    <Category
+      category="Lysristet"
+      description="Vores lysristede bønner er opdelt i 3 forskellige farver, den grønne varierer i smag og navn, alt efter hvilke bønner vi får sendt fra farmene. kaffen er velegent til pourover eller filterkaffe."
+    />
+
+    <Category
+      category="Mellemristet"
+      description="Vores mellemristede bønner er kendetegnet ved den røde farve og er velegnet til filterkaffe."
+    />
+
+    <Category
+      category="Mørkristet"
+      description="Vores mørkristede bønner har en dyb og rund smag, og er den bønne vi rister i længst tid. kaffen er velegnet til espresso."
+    />
+
+    <Subscriptionsection />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .grid_1-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    padding-top: 30px;
+    margin-bottom: -70px;
+  }
+
+  .grid_1-1 div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .levering img {
+    width: 50px;
+    height: auto;
+  }
+
+  .fragt img {
+    width: 30px;
+  }
+  @media (min-width: 768px) {
+    .grid_1-1 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .levering img {
+      width: 70px;
+    }
+
+    .fragt img {
+      width: 50px;
+    }
+  }
+</style>

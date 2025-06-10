@@ -1,0 +1,31 @@
+---
+const { ctaText, ctaLink, id } = Astro.props;
+---
+
+<a id={id} href={ctaLink} class="square-cta">
+  {ctaText}
+</a>
+
+<style>
+  .square-cta {
+    display: inline-block;
+    padding: 5px 7px;
+    background-color: var(--beige-color);
+    color: var(--black-color);
+    border: 1px solid var(--green-color);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .square-cta.selected {
+    background-color: var(--green-color);
+    color: var(--white-color);
+    border: 1px solid var(--green-color);
+  }
+  @media (min-width: 768px) {
+    .square-cta {
+      padding: 10px 10px;
+    }
+  }
+</style>

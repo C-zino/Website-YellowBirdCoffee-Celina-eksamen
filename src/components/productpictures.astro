@@ -1,0 +1,173 @@
+---
+const { img1, img2, img3, img4, display_name, alt1, alt2, alt3, alt4 } =
+  Astro.props;
+---
+
+<section class="productpictures">
+  <img class="img1" src={img1} alt={alt1 || display_name || "Produktbillede"} />
+  <img class="img2" src={img2} alt={alt2 || display_name || "Produktbillede"} />
+  <img class="img3" src={img3} alt={alt3 || display_name || "Produktbillede"} />
+  <img class="img4" src={img4} alt={alt4 || display_name || "Produktbillede"} />
+  <div class="grid_1-1-1-1">
+    <img
+      class="gridimg1"
+      src={img1}
+      alt={alt1 || display_name || "Produktbillede"}
+    />
+    <img
+      class="gridimg2"
+      src={img2}
+      alt={alt2 || display_name || "Produktbillede"}
+    />
+    <img
+      class="gridimg3"
+      src={img3}
+      alt={alt3 || display_name || "Produktbillede"}
+    />
+    <img
+      class="gridimg4"
+      src={img4}
+      alt={alt4 || display_name || "Produktbillede"}
+    />
+  </div>
+</section>
+
+<style>
+  .productpictures {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+    object-fit: cover;
+  }
+
+  .grid_1-1-1-1 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .grid_1-1-1-1 img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .addborder {
+    border: solid 1px var(--black-color);
+  }
+
+  .hide {
+    display: none;
+  }
+
+  @media (min-width: 1200px) {
+    .productpictures {
+      display: grid;
+      grid-template-columns: 1fr 5fr;
+      gap: 20px;
+    }
+
+    .grid_1-1-1-1 {
+      grid-column: 1;
+      grid-row: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 0;
+      align-self: start;
+    }
+
+    .grid_1-1-1-1 img {
+      width: 124px;
+    }
+
+    .img1,
+    .img2,
+    .img3,
+    .img4 {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const img1 = document.querySelector(".img1");
+    const img2 = document.querySelector(".img2");
+    const img3 = document.querySelector(".img3");
+    const img4 = document.querySelector(".img4");
+    const thumb1 = document.querySelector(".gridimg1");
+    const thumb2 = document.querySelector(".gridimg2");
+    const thumb3 = document.querySelector(".gridimg3");
+    const thumb4 = document.querySelector(".gridimg4");
+
+    // if bruges til at sikre, at billederne er tilgængelige, før vi tilføjer event listeners
+
+    if (img1 && img2 && img3 && img4 && thumb1 && thumb2 && thumb3 && thumb4) {
+      // Vis kun første billede og marker første thumb
+      img1.classList.remove("hide");
+      img2.classList.add("hide");
+      img3.classList.add("hide");
+      img4.classList.add("hide");
+      thumb1.classList.add("addborder");
+      thumb2.classList.remove("addborder");
+      thumb3.classList.remove("addborder");
+      thumb4.classList.remove("addborder");
+
+      // Klik på thumb1
+      thumb1.addEventListener("click", function () {
+        img1.classList.remove("hide");
+        img2.classList.add("hide");
+        img3.classList.add("hide");
+        img4.classList.add("hide");
+        thumb1.classList.add("addborder");
+        thumb2.classList.remove("addborder");
+        thumb3.classList.remove("addborder");
+        thumb4.classList.remove("addborder");
+      });
+
+      // Klik på thumb2
+      thumb2.addEventListener("click", function () {
+        img1.classList.add("hide");
+        img2.classList.remove("hide");
+        img3.classList.add("hide");
+        img4.classList.add("hide");
+        thumb1.classList.remove("addborder");
+        thumb2.classList.add("addborder");
+        thumb3.classList.remove("addborder");
+        thumb4.classList.remove("addborder");
+      });
+
+      // Klik på thumb3
+      thumb3.addEventListener("click", function () {
+        img1.classList.add("hide");
+        img2.classList.add("hide");
+        img3.classList.remove("hide");
+        img4.classList.add("hide");
+        thumb1.classList.remove("addborder");
+        thumb2.classList.remove("addborder");
+        thumb3.classList.add("addborder");
+        thumb4.classList.remove("addborder");
+      });
+
+      // Klik på thumb4
+      thumb4.addEventListener("click", function () {
+        img1.classList.add("hide");
+        img2.classList.add("hide");
+        img3.classList.add("hide");
+        img4.classList.remove("hide");
+        thumb1.classList.remove("addborder");
+        thumb2.classList.remove("addborder");
+        thumb3.classList.remove("addborder");
+        thumb4.classList.add("addborder");
+      });
+    }
+  });
+</script>

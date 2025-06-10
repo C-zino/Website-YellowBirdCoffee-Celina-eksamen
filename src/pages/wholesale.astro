@@ -1,0 +1,222 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Menu from "../components/menu.astro";
+import Footer from "../components/footer.astro";
+import SubpageHero from "../components/subpagehero.astro";
+import RoundCTA from "../components/roundCTA.astro";
+import Contactform from "../components/contactform.astro";
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/img/icons/logo.ico" type="image/x-icon" />
+  <meta name="generator" content="Astro" />
+  <title>Engros | Yellow Bird Coffee</title>
+</head>
+
+<Layout>
+  <header>
+    <Menu />
+    <SubpageHero
+      src="/img/erhverv.webp"
+      alt="Erhverv hero sektion"
+      header="Erhverv"
+    />
+  </header>
+  <main>
+    <article class="grid_1-1 margin">
+      <div>
+        <h3>Skræddersyede løsninger</h3>
+        <p>
+          Vi har solid erfaring med at samarbejde med både små og store
+          virksomheder og tilbyder skræddersyede løsninger inden for træning,
+          udstyr og naturligvis kvalitetskaffe. Ønsker din virksomhed at tilbyde
+          kaffe i absolut topklasse, tager vi gerne en uforpligtende dialog om
+          et muligt samarbejde.
+        </p>
+        <p>Kontakt os for at høre nærmere.</p>
+        <RoundCTA ctaText="Kontakt os" ctaLink="/kontakt" />
+      </div>
+      <img src="/img/packingbags.webp" alt="Pakkeposer" />
+    </article>
+    <article class="grid_1-1 green">
+      <div class="tekst">
+        <h3>Hvad vi tilbyder</h3>
+        <p>
+          Hos Yellow Bird Coffee tilbyder vi friskristet kvalitetskaffe,
+          udstyrsløsninger og support – skræddersyet til netop jeres behov.
+          Uanset om det er til kontormiljøer, caféer eller restauranter, sørger
+          vi for, at I får den rette løsning, til både medarbejdere og gæster.
+          Udover levering af kvalitetskaffe, tilbyder vi rådgivning, træning og
+          teknisk support, så I får mest muligt ud af jeres kaffeløsning.
+        </p>
+        <p>
+          Er I interesserede, så udfyld formularen nedenfor eller kontakt os
+          direkte på
+        </p>
+
+        <a href="mailto:wholesale@yellowbirdcoffee.dk"
+          >wholesale@yellowbirdcoffee.dk</a
+        >
+      </div>
+      <img
+        class="billede"
+        src="/img/wholesaleroast.webp"
+        alt="Kaffebønner i en kafferister"
+      />
+    </article>
+    <article class="grid_1-1 margin">
+      <div>
+        <h3>Internationale partnere</h3>
+        <p>
+          Selvom vores risteri ligger i København, kan du trygt regne med os –
+          uanset hvor i verden din virksomhed befinder sig. Med mange års
+          erfaring med international forsendelse og en pålidelig logistikpartner
+          sørger vi for, at du modtager friskristet kaffe til en
+          konkurrencedygtig pris og uden besvær.
+        </p>
+      </div>
+      <div class="image-overlap">
+        <img src="/img/coffeefarm.webp" alt="Kaffefarm" class="base-image" />
+        <img src="/img/sack.webp" alt="kaffesæk" class="overlap-image" />
+      </div>
+    </article>
+    <Contactform />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  img {
+    width: 100%;
+
+    max-height: 400px; /* Prevent excessive height */
+    object-fit: cover;
+    margin-top: 20px;
+  }
+
+  .green {
+    background-color: var(--green-color);
+    color: var(--white-color);
+  }
+  .tekst {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 5px;
+  }
+  a {
+    color: var(--green-color);
+    text-decoration: none;
+    background-color: var(--background-color);
+    padding: 5px 15px;
+    border-radius: 10px;
+    display: inline-block; /* Add this line */
+    margin-top: 20px; /* Now margin will work */
+  }
+
+  article {
+    margin-bottom: 70px;
+    margin-top: 70px;
+  }
+
+  .image-overlap {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 150px; /* Reduced from 250px for mobile */
+  }
+
+  .base-image {
+    width: 70%;
+    height: auto;
+    max-height: 300px; /* Added max-height constraint */
+    display: block;
+    position: relative;
+    margin-left: 50px;
+  }
+
+  .overlap-image {
+    position: absolute;
+    width: 40%;
+    max-width: 200px; /* Added max-width constraint */
+    max-height: 200px; /* Added max-height constraint */
+    left: 0;
+    top: 150px;
+    z-index: 3;
+    border: solid 7px var(--background-color);
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    .base-image {
+      width: 60%;
+    }
+
+    .overlap-image {
+      width: 50%;
+      top: 50px;
+      margin-bottom: 0;
+    }
+    .grid_1-1 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 70px;
+    }
+    img {
+      max-height: none;
+      height: 100%;
+    }
+
+    .base-image {
+      max-height: none;
+    }
+
+    .overlap-image {
+      max-width: none;
+      max-height: none;
+    }
+    a {
+      font-size: 20px;
+      padding: 10px 30px;
+    }
+    article {
+      margin-top: 150px;
+      margin-bottom: 0;
+    }
+    .tekst {
+      grid-column: 2 / span 1;
+      margin-bottom: 50px;
+      margin-right: 200px;
+    }
+    .billede {
+      grid-column: 1 / span 1;
+      margin-top: 0;
+      margin-left: 0;
+      grid-row: 1;
+      justify-self: start;
+
+      aspect-ratio: 1.2/ 1;
+    }
+    .billede img {
+      width: 70%;
+      height: auto;
+      justify-self: start;
+    }
+    .green a {
+      margin-top: 10px;
+    }
+    .green {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+    }
+  }
+  main {
+    padding-bottom: 40px;
+  }
+</style>

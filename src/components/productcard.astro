@@ -1,0 +1,166 @@
+---
+const apikey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqaW9pbG52bW1ha3lvY3FhdXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTk5MzAsImV4cCI6MjA2MzQ3NTkzMH0.lJHBOdRj_eDmkVncIRtyW1Ty8UleaWHyYMXT0tNxPhs";
+const curl =
+  "https://xjioilnvmmakyocqauwh.supabase.co/rest/v1/Products?select=*";
+const options = {
+  headers: { apikey: apikey },
+};
+const data = await fetch(curl, options).then((res) => res.json());
+console.log(data);
+const { Products } = Astro.props;
+---
+
+<a href={`/product/${Products.id}`} class="product-link">
+  <article>
+    <h5>{Products.display_name}</h5>
+    <p>Fra {Products.price_250}Kr.</p>
+    <img src={Products.img1} alt={Products.display_name} />
+    <p>{Products.bean}</p>
+    <div class="grid_1-1-1">
+      <img src={Products.icon1} alt={Products.icon1_text} />
+      <img src={Products.icon2} alt={Products.icon2_text} />
+      <img src={Products.icon3} alt={Products.icon3_text} />
+    </div>
+  </article>
+</a>
+
+<style>
+  .product-link {
+    text-decoration: none;
+    color: inherit;
+    /* width: 75%; */
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .product-link article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    padding: 4px 4px 30px 4px;
+    gap: 2px; /* Reduces space between elements */
+  }
+
+  .product-link article:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  p {
+    line-height: inherit;
+    margin: 0;
+    /* padding: 2px; */
+    padding-inline: 1px;
+    /* word-wrap: break-word; */
+    text-align: center;
+  }
+
+  article {
+    /* width: 130px; */
+    min-width: 0;
+    max-width: 80vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--beige-color);
+    /* width: 200px; fjernet for at undgå dobbelt width */
+    width: 150px;
+    /* height: 230px; */
+    height: auto;
+    padding-bottom: 10px;
+  }
+
+  article h5,
+  article p {
+    margin: 0; /* Remove default margins */
+  }
+
+  article h5 {
+    margin-top: 7px;
+  }
+
+  article img {
+    max-width: 55px; /* Slightly smaller main image */
+    max-width: 70px;
+    width: 100%;
+  }
+
+  .grid_1-1-1 {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px; /* Replace margin-top: auto with a fixed value */
+    align-self: center; /* Center the icons container */
+  }
+
+  .grid_1-1-1 img {
+    max-width: 20px; /* Slightly smaller icons */
+  }
+
+  @media (min-width: 768px) {
+    article {
+      height: 450px;
+      width: 349px;
+    }
+
+    article img {
+      max-width: 200px;
+    }
+
+    .grid_1-1-1 img {
+      max-width: 35px; /* Adjust icon size for larger screens */
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .product-link article {
+      gap: 1px;
+    }
+
+    p {
+      line-height: inherit;
+      margin: 0;
+      padding: 0;
+      padding-inline: 1px;
+    }
+
+    article h5,
+    article p {
+      margin: 0; /* Remove default margins */
+    }
+
+    article img {
+      max-width: 70px;
+    }
+
+    .grid_1-1-1 {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px; /* Replace margin-top: auto with a fixed value */
+      align-self: center; /* Center the icons container */
+    }
+
+    .grid_1-1-1 img {
+      max-width: 20px; /* Slightly smaller icons */
+    }
+    article {
+      width: 260px;
+      height: 340px;
+    }
+    article img {
+      max-width: 100px;
+    }
+    .grid_1-1-1 img {
+      max-width: 25px;
+    }
+    .product-link {
+      margin: 0;
+    }
+  }
+</style>

@@ -1,0 +1,229 @@
+---
+import RoundCTA from "./roundCTA.astro";
+---
+
+<section class="kontaktformular margin">
+  <section class="kontaktform">
+    <div>
+      <h2>Kontakt os</h2>
+      <p>Vi vil meget gerne samarbejde direkte med dig og din virksomhed. Udfyld formularen nedenfor og fortæl os lidt mere om dig og din forretning – eller kontakt os på:</p>
+      <p>Telefon: +45 31 33 84 33</p>
+
+      <form action="/send" method="POST">
+        <!-- action og method er atributter til <form>-elementet, der definere hvor formularens data skal sendes hen -->
+        <fieldset>
+          <legend>Dine informationer</legend>
+          <!-- man bruger <legend> i stedet for fx. h3, da det er semantisk korrekt når det er i forbindelse med <fieldset> -->
+          <div class="form-group">
+            <div class="grid_1-1">
+              <p>
+                <input type="text" name="fornavn" placeholder="Fornavn" required />
+              </p>
+              <p>
+                <input type="text" name="efternavn" placeholder="Efternavn" required />
+              </p>
+            </div>
+            <p class="emailfield">
+              <input type="email" name="email" placeholder="Mail" required />
+            </p>
+            <div class="grid_1-1">
+              <p><input type="text" name="firma" placeholder="Firma" /></p>
+              <p><input type="tel" name="telefon" placeholder="Telefon" /></p>
+            </div>
+            <textarea name="besked" placeholder="Din besked" rows="5" required></textarea>
+            <!-- textarea er en felt hvor brugeren kan skrive flere linjer -->
+          </div>
+          <p class="knap_send">Send besked</p>
+          <!-- Kan man slette linket i <RoundCTA> og så selv sætte det ind hvis man skal linke?-->
+        </fieldset>
+      </form>
+    </div>
+    <div>
+      <img src="/img/logo.webp" alt="Billede af Logo" />
+    </div>
+  </section>
+
+  <section class="kontaktform2">
+    <div>
+      <h1>Tak for at kontakte os!</h1>
+      <p>Husk du altid kan kontakte os på:</p>
+      <p>Telefon: +45 31 33 84 33</p>
+      <p class="knap_tilbage">Tilbage</p>
+    </div>
+    <div>
+      <img src="../../public/img/logo.webp" alt="Billede af Logo" />
+    </div>
+  </section>
+</section>
+
+<style>
+  h1 {
+    margin-top: 0;
+  }
+
+  div p {
+    margin: 7px 0;
+  }
+
+  textarea {
+    margin: 7px 0 15px 0;
+  }
+  .kontaktform,
+  .kontaktform2 {
+    padding: 1.2rem;
+    border: 2px solid var(--green-color);
+    border-radius: 15px;
+    margin: 3vh 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Changed from repeat(2, 1fr) to make first column wider */
+  }
+
+  .kontaktform2 {
+    position: relative;
+    z-index: 1;
+    top: 0;
+    margin: 0;
+  }
+
+  .kontaktformular {
+    position: relative;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .kontaktform div:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  fieldset {
+    border: none;
+    padding: 0;
+  }
+
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  input,
+  textarea {
+    border: 1px solid var(--black-color);
+    padding: 0.4vh;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  textarea {
+    height: 100px; /* Reduced height */
+  }
+
+  .knap_send,
+  .knap_tilbage {
+    margin-top: 7px;
+    display: inline-block;
+    padding: 6px 13px;
+    border-radius: 30px;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .knap_send:hover,
+  .knap_tilbage:hover {
+    background-color: Var(--yellow-color);
+  }
+
+  .hide {
+    display: none;
+  }
+
+  @media (min-width: 550px) {
+    img {
+      width: 60%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .kontaktform,
+    .kontaktform2 {
+      max-width: 1000px;
+      margin: 4vh auto;
+      padding: 2rem;
+      grid-template-columns: 3fr 2fr; /* Adjusted ratio for desktop */
+    }
+
+    .grid_1-1 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px; /* Reduced from 60px */
+      column-gap: 4vw;
+    }
+
+    input,
+    textarea {
+      padding: 2vh; /* Reduced from 2vh */
+    }
+
+    textarea {
+      width: 80%;
+      height: 100px;
+    }
+
+    img {
+      width: 50%; /* Reduced from 60% */
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener("load", start);
+
+  function start() {
+    // Variabler for knapper og sektioner
+    const knap_tilbage = document.querySelector(".knap_tilbage");
+    const knap_sendbesked = document.querySelector(".knap_send");
+    const kontaktform2 = document.querySelector(".kontaktform2");
+    const kontaktform = document.querySelector(".kontaktform");
+
+    // Skjul alle sektioner som standard
+    hideAllScreens();
+    kontaktform?.classList.remove("hide");
+
+    console.log("DOM er indlæst");
+
+    // Tilføj event listeners
+    // Dette er kaldet en arrowfunction, som er en kortere måde at skrive funktioner på
+    // Det betyder at når knap_sendbesked bliver klikket, så kaldes takkeside funktionen
+    // kontaktform og kontaktform2  bliver sendt som parametre ind i funktionen "takkeside"
+    knap_sendbesked?.addEventListener("click", () => {
+      takkeside(kontaktform, kontaktform2);
+    });
+
+    knap_tilbage?.addEventListener("click", () => {
+      start();
+    });
+  }
+
+  function hideAllScreens() {
+    const kontaktform = document.querySelector(".kontaktform");
+    const kontaktform2 = document.querySelector(".kontaktform2");
+
+    kontaktform?.classList.add("hide");
+    kontaktform2?.classList.add("hide");
+  }
+
+  function takkeside(kontaktform, kontaktform2) {
+    console.log("Viser takkeside");
+    hideAllScreens();
+    kontaktform2?.classList.remove("hide");
+  }
+</script>

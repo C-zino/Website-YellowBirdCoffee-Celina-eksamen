@@ -1,0 +1,121 @@
+---
+const { icon, alt } = Astro.props;
+---
+
+<div class="login-dropdown-container" id="container">
+  <button class="usericon" id="open-login">
+    <img src={icon} alt={alt} />
+  </button>
+  <div class="login-dropdown hide" id="login-dropdown">
+    <form id="login-form">
+      <label>
+        Brugernavn
+        <input type="text" name="username" id="username" />
+      </label>
+      <label>
+        Kodeord
+        <input type="password" name="password" />
+      </label>
+      <button type="button" id="login-btn">Login</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .hide {
+    display: none !important;
+  }
+  .login-dropdown-container {
+    position: relative;
+  }
+  .usericon {
+    background: none;
+    border: none;
+  }
+  .usericon img {
+    height: 35px;
+  }
+  .login-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: var(--background-color);
+    border-radius: 5px;
+    border: 1px solid var(--green-color);
+    padding: 1rem;
+    min-width: 200px;
+    z-index: 1010;
+  }
+  .login-dropdown label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    gap: 0.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .login-dropdown input {
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  .login-dropdown button[type="button"] {
+    padding: 9px 15px;
+    border-radius: 30px;
+    border: none;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  .login-dropdown button:hover {
+    background-color: var(--yellow-color);
+  }
+  @media (min-width: 768px) {
+    .usericon img {
+      height: 45px;
+    }
+  }
+</style>
+
+<!-- is inline bruges til at sikre, at scriptet køres efter DOM'en er indlæst,
+således at scriptet køres efter at siden er loaded og derved kan finde de
+enkelte elementer. Dette sikre at der ikke opstår fejl og den ikke viser
+advarsler i konsollen. -->
+
+<script is:inline>
+  // Åbner login dropdown ved klik på user ikoent
+  document.getElementById("open-login").addEventListener("click", function () {
+    const dropdown = document.getElementById("login-dropdown");
+    // hvis dropdown er skjult, skal den fjerne klassen "hide", og vise den
+    if (dropdown.classList.contains("hide")) {
+      dropdown.classList.remove("hide");
+      // hvis dropdown ikke er skjult, skal den tilføje klassen "hide", og skjule den
+    } else {
+      dropdown.classList.add("hide");
+    }
+  });
+
+  // Hved intastning af brugernavn, send brugeren til deres side, ved klik på login knappen
+  document.getElementById("login-btn").addEventListener("click", function () {
+    // Henter brugernavnet fra input feltet
+    const username = document.getElementById("username").value;
+    // Hvis brugernavnet er udfyldt, sendes brugeren til deres side
+    if (username) {
+      window.location.href = `/${username}`;
+    }
+  });
+
+  // Lukker dropdown, hvis der klikkes udenfor elementet
+  // function (e) betyder at den tager et event som parameter
+  // med e.target kan vi finde det element, der blev klikket på
+  document.addEventListener("click", function (e) {
+    const container = document.getElementById("container");
+    const dropdown = document.getElementById("login-dropdown");
+
+    // Hvis container ikke indeholder det element, der blev klikket på,
+    // tilføjes klassen "hide" til dropdown, hvilket skjuler den
+    if (!container.contains(e.target)) {
+      dropdown.classList.add("hide");
+    }
+  });
+</script>
