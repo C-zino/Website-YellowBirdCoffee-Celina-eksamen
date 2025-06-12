@@ -2,13 +2,18 @@
 import Productcard from "./productcard.astro";
 const { category, description } = Astro.props;
 
+// url til Supabase API for at hente produkter
 const supabaseUrl = "https://xjioilnvmmakyocqauwh.supabase.co/rest/v1";
+// API-nøgle for at autentificere anmodninger til Supabase
 const apikey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqaW9pbG52bW1ha3lvY3FhdXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTk5MzAsImV4cCI6MjA2MzQ3NTkzMH0.lJHBOdRj_eDmkVncIRtyW1Ty8UleaWHyYMXT0tNxPhs";
 
+// Henter produkter fra Supabase, hvor kategori matcher den valgte kategori
 const response = await fetch(
+  // Bygger endpointet dynamisk ud fra valgt kategori
   `${supabaseUrl}/Products?category=eq.${category}&select=*`,
   {
+    // Sender API-nøgle med i headers for at få adgang
     headers: {
       apikey: apikey,
       Authorization: `Bearer ${apikey}`,
@@ -16,6 +21,7 @@ const response = await fetch(
   }
 );
 
+// Konverterer svaret til JSON, så det kan bruges i komponenten
 const products = await response.json();
 ---
 

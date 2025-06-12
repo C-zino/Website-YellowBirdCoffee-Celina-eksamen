@@ -17,17 +17,19 @@ export async function getStaticPaths() {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqaW9pbG52bW1ha3lvY3FhdXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTk5MzAsImV4cCI6MjA2MzQ3NTkzMH0.lJHBOdRj_eDmkVncIRtyW1Ty8UleaWHyYMXT0tNxPhs";
   const url =
     "https://xjioilnvmmakyocqauwh.supabase.co/rest/v1/Products?select=id";
-  // Her henter vi kun ID’erne fra databasen
+  // Her henter vi kun ID’erne fra databasen via `id` endpoint
 
   // fetch = "gå ud på nettet og hent noget"
   // await = "vent på svaret, før vi går videre"
+  // sender vi nøglen med i headers, så vi kan få adgang til databasen
   const res = await fetch(url, {
     headers: {
-      apikey: apikey, // vi sender nøglen med som adgang
+      apikey: apikey,
     },
   });
 
-  const data = await res.json(); // Vi laver svaret om til et JavaScript-array
+  // Gør arrayet til JSON-format, så vi kan arbejde med det i JavaScript
+  const data = await res.json();
 
   // Her laver vi en liste over ID’er, som Astro bruger til at bygge en side til hvert produkt
   //  map = "for hver ting i arrayet, gør dette"
@@ -44,10 +46,13 @@ export async function getStaticPaths() {
 // 2. Hent produktdata baseret på ID:
 const { id } = Astro.params; // Her får vi id’et fra URL’en – fx “3” hvis vi er på /produkt/3
 
+// Vi laver en URL, der henter det specifikke produkt med det ID, vi fik fra URL’en
 const apikey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqaW9pbG52bW1ha3lvY3FhdXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTk5MzAsImV4cCI6MjA2MzQ3NTkzMH0.lJHBOdRj_eDmkVncIRtyW1Ty8UleaWHyYMXT0tNxPhs";
+// URL’en henter produktet med det specifikke ID
 const url = `https://xjioilnvmmakyocqauwh.supabase.co/rest/v1/Products?id=eq.${id}&select=*`;
 
+// Informationer sendes i headers for at få adgang til databasen
 const options = {
   headers: {
     apikey: apikey,

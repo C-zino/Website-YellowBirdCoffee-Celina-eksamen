@@ -1,15 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Productcard from "./productcard.astro";
+
+// Vi henter alle produkter fra vores Supabase-database
+// Dette er API-nøglen, der giver adgang til vores Supabase-database
 const apikey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqaW9pbG52bW1ha3lvY3FhdXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTk5MzAsImV4cCI6MjA2MzQ3NTkzMH0.lJHBOdRj_eDmkVncIRtyW1Ty8UleaWHyYMXT0tNxPhs";
+
+// URL til vores Supabase API, hvor vi henter alle produkter
+// Vi bruger "select=*" for at hente alle felter for hvert produkt
 const curl =
   "https://xjioilnvmmakyocqauwh.supabase.co/rest/v1/Products?select=*";
 
+// Vi laver en anmodning til vores Supabase API for at hente produktdata
+// Vi sender API-nøglen med i headers for at autentificere anmodningen
 const options = {
   headers: { apikey: apikey },
 };
 
+// Vi venter på, at anmodningen bliver færdig, og konverterer svaret til JSON-format
 const data = await fetch(curl, options).then((res) => res.json());
 ---
 

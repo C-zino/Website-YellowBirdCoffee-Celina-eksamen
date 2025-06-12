@@ -142,21 +142,27 @@ import SquareCTA from "../components/SquareCTA.astro";
 </style>
 
 <script>
+  // Når siden indlæses, vises lysristet kaffe som standard
+
   window.addEventListener("load", start);
   function start() {
     hideAllScreens();
     document.querySelector("#light")?.classList.remove("hide");
 
+    // adder selected class til lysristet kaffe CTA
+    // Fjerner selected class fra de andre CTA'er
     document.querySelector("#light-cta")?.classList.add("selected");
     document.querySelector("#medium-cta")?.classList.remove("selected");
     document.querySelector("#dark-cta")?.classList.remove("selected");
     document.querySelector("#mixed-cta")?.classList.remove("selected");
 
+    // Tilføjer event listeners til CTA'er så de kan skifte visning ved klik
     document.querySelector("#medium-cta")?.addEventListener("click", medium);
     document.querySelector("#dark-cta")?.addEventListener("click", dark);
     document.querySelector("#mixed-cta")?.addEventListener("click", mixed);
   }
 
+  // Funktion til at skjule alle skærme fra start
   function hideAllScreens() {
     document.querySelector("#light")?.classList.add("hide");
     document.querySelector("#medium")?.classList.add("hide");
@@ -164,6 +170,7 @@ import SquareCTA from "../components/SquareCTA.astro";
     document.querySelector("#mixed")?.classList.add("hide");
   }
 
+  // Funktioner til at vise de forskellige sektioner
   function medium() {
     hideAllScreens();
     document.querySelector("#medium")?.classList.remove("hide");
@@ -178,6 +185,7 @@ import SquareCTA from "../components/SquareCTA.astro";
     document.querySelector("#mixed-cta")?.addEventListener("click", mixed);
   }
 
+  // Funktioner til at vise de forskellige sektioner
   function dark() {
     hideAllScreens();
     document.querySelector("#dark")?.classList.remove("hide");
@@ -192,6 +200,7 @@ import SquareCTA from "../components/SquareCTA.astro";
     document.querySelector("#mixed-cta")?.addEventListener("click", mixed);
   }
 
+  // Funktioner til at vise de forskellige sektioner
   function mixed() {
     hideAllScreens();
     document.querySelector("#mixed")?.classList.remove("hide");

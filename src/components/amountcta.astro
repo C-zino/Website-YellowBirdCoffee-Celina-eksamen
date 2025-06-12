@@ -35,6 +35,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".roundcta-amount").forEach(function (btn) {
       // For hver knap, find de elementer der skal bruges til at ændre mængden
+      // bruger as htmlspanelement for at sikre, at vi får det rigtige elementtype
       var minus = btn.querySelector(".amount-minus") as HTMLSpanElement | null;
       var plus = btn.querySelector(".amount-plus") as HTMLSpanElement | null;
       var value = btn.querySelector(".amount-value") as HTMLSpanElement | null;

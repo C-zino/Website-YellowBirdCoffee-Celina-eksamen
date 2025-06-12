@@ -1,12 +1,12 @@
----
-import RoundCTA from "./roundCTA.astro";
----
-
 <section class="kontaktformular margin">
   <section class="kontaktform">
     <div>
       <h2>Kontakt os</h2>
-      <p>Vi vil meget gerne samarbejde direkte med dig og din virksomhed. Udfyld formularen nedenfor og fortæl os lidt mere om dig og din forretning – eller kontakt os på:</p>
+      <p>
+        Vi vil meget gerne samarbejde direkte med dig og din virksomhed. Udfyld
+        formularen nedenfor og fortæl os lidt mere om dig og din forretning –
+        eller kontakt os på:
+      </p>
       <p>Telefon: +45 31 33 84 33</p>
 
       <form action="/send" method="POST">
@@ -17,10 +17,20 @@ import RoundCTA from "./roundCTA.astro";
           <div class="form-group">
             <div class="grid_1-1">
               <p>
-                <input type="text" name="fornavn" placeholder="Fornavn" required />
+                <input
+                  type="text"
+                  name="fornavn"
+                  placeholder="Fornavn"
+                  required
+                />
               </p>
               <p>
-                <input type="text" name="efternavn" placeholder="Efternavn" required />
+                <input
+                  type="text"
+                  name="efternavn"
+                  placeholder="Efternavn"
+                  required
+                />
               </p>
             </div>
             <p class="emailfield">
@@ -30,11 +40,11 @@ import RoundCTA from "./roundCTA.astro";
               <p><input type="text" name="firma" placeholder="Firma" /></p>
               <p><input type="tel" name="telefon" placeholder="Telefon" /></p>
             </div>
-            <textarea name="besked" placeholder="Din besked" rows="5" required></textarea>
+            <textarea name="besked" placeholder="Din besked" rows="5" required
+            ></textarea>
             <!-- textarea er en felt hvor brugeren kan skrive flere linjer -->
           </div>
           <p class="knap_send">Send besked</p>
-          <!-- Kan man slette linket i <RoundCTA> og så selv sætte det ind hvis man skal linke?-->
         </fieldset>
       </form>
     </div>
@@ -213,6 +223,7 @@ import RoundCTA from "./roundCTA.astro";
     });
   }
 
+  // Funktion der skjuler alle skærme
   function hideAllScreens() {
     const kontaktform = document.querySelector(".kontaktform");
     const kontaktform2 = document.querySelector(".kontaktform2");
@@ -221,6 +232,7 @@ import RoundCTA from "./roundCTA.astro";
     kontaktform2?.classList.add("hide");
   }
 
+  // Funktion der viser takkesiden
   function takkeside(kontaktform, kontaktform2) {
     console.log("Viser takkeside");
     hideAllScreens();
