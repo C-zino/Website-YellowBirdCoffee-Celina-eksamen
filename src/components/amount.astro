@@ -2,27 +2,33 @@
 import SquareCTA from "./SquareCTA.astro";
 import RoundCTA from "./roundCTA.astro";
 
+// Henter produkter fra Supabase (API)
 const apikey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqaW9pbG52bW1ha3lvY3FhdXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTk5MzAsImV4cCI6MjA2MzQ3NTkzMH0.lJHBOdRj_eDmkVncIRtyW1Ty8UleaWHyYMXT0tNxPhs";
 const response = await fetch(
   "https://xjioilnvmmakyocqauwh.supabase.co/rest/v1/Products?select=",
   {
+    // bearer bruges til at autentificere API-kaldet, hvilket er nødvendigt for at få adgang til beskyttede ressourcer
     headers: {
       apikey: apikey,
       Authorization: `Bearer ${apikey}`,
     },
   }
 );
+
+// Tjekker om api-kaldet var succesfuldt
 const products = await response.json();
 const product = products[0];
 ---
 
 <article>
+  <!-- Knapper til at vælge mellem engangskøb og abonnement -->
   <div class="type-selector">
     <button class="type-btn selected" data-type="amount">Mængde</button>
     <button class="type-btn" data-type="subscribe">Abonner</button>
   </div>
 
+  <!-- Sektion for engangskøb (mængde) -->
   <div class="amount-section">
     <div class="amount-selector">
       <SquareCTA ctaText="250g" />
@@ -30,17 +36,20 @@ const product = products[0];
     </div>
   </div>
 
+  <!-- Sektion for abonnement (skjult som standard) -->
   <div class="subscribe-section" style="display: none;">
     <RoundCTA ctaText="Opret abonnement" ctaLink="/subscription" />
   </div>
 </article>
 
 <style>
+  /* Layout for valg-knapperne */
   .type-selector {
     display: flex;
     gap: 5rem;
   }
 
+  /* Style for type-knapperne (Mængde/Abonner) */
   .type-btn {
     background: none;
     border: none;
@@ -50,6 +59,7 @@ const product = products[0];
     padding-bottom: 0.5rem;
   }
 
+  /* Understregning på valgt type-knap */
   .type-btn.selected::after {
     content: "";
     position: absolute;
@@ -60,27 +70,29 @@ const product = products[0];
     background-color: var(--green-color);
   }
 
+  /* Sektioner for mængde og abonnement */
   .amount-section,
   .subscribe-section {
     width: 100%;
     min-height: 60px;
     display: flex;
-
     align-items: center;
   }
 
+  /* Abonnement-sektion skjules som standard */
   .subscribe-section {
-    display: none; /* Initial state */
+    display: none;
     align-items: center;
   }
 
+  /* Layout for mængdevalg-knapper */
   .amount-selector {
     display: flex;
     gap: 15px;
-
     width: 100%;
   }
 
+  /* Centrer abonnement-knap */
   .subscribe-section :global(.round-cta) {
     margin: 0 auto;
     text-align: center;
@@ -102,12 +114,16 @@ const product = products[0];
 </style>
 
 <script define:vars={{ product }}>
+  // Find parent-elementet for scriptet
   const root =
     document.currentScript && document.currentScript.parentElement
       ? document.currentScript.parentElement
       : document;
+
+  // Hent alle mængde-knapper (SquareCTA)
   const buttons = root.querySelectorAll(".square-cta");
 
+  // Tilføj klik-event til mængde-knapperne, så kun én kan være valgt ad gangen
   buttons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -116,10 +132,12 @@ const product = products[0];
     });
   });
 
+  // Hent type-knapper og sektioner
   const typeButtons = root.querySelectorAll(".type-btn");
   const amountSection = root.querySelector(".amount-section");
   const subscribeSection = root.querySelector(".subscribe-section");
 
+  // Skift mellem mængde og abonnement, når man klikker på type-knapperne
   typeButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       typeButtons.forEach((b) => b.classList.remove("selected"));

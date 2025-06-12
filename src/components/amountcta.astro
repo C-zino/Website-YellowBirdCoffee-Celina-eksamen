@@ -34,10 +34,15 @@
   // Find alle knapper med klassen roundcta-amount
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".roundcta-amount").forEach(function (btn) {
+      // For hver knap, find de elementer der skal bruges til at ændre mængden
       var minus = btn.querySelector(".amount-minus") as HTMLSpanElement | null;
       var plus = btn.querySelector(".amount-plus") as HTMLSpanElement | null;
       var value = btn.querySelector(".amount-value") as HTMLSpanElement | null;
+
+      // Start med at sætte mængden til 1
       var amount = 1;
+
+      // hvis man trykker på minus, så træk 1 fra, dog kun hvis mængden er større end 1
       if (minus) {
         minus.onclick = function () {
           if (amount > 1) {
@@ -46,6 +51,8 @@
           }
         };
       }
+
+      // hvis man trykker på plus, så læg 1 til
       if (plus) {
         plus.onclick = function () {
           amount = amount + 1;

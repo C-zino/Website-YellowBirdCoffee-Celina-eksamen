@@ -10,11 +10,11 @@ const { icon, alt } = Astro.props;
     <form id="login-form">
       <label>
         Brugernavn
-        <input type="text" name="username" id="username" />
+        <input type="text" name="username" id="username" autocomplete="off" />
       </label>
       <label>
         Kodeord
-        <input type="password" name="password" />
+        <input type="password" name="password" autocomplete="off" />
       </label>
       <!-- type="button" gør, at knappen kun udfører din JavaScript og ikke sender formen (genindlæser siden). -->
       <button type="button" id="login-btn">Login</button>
@@ -110,13 +110,13 @@ advarsler i konsollen. -->
     }
   });
 
-  // Hved intastning af brugernavn, send brugeren til deres side, ved klik på login knappen
+  // Ved intastning af brugernavn, send brugeren til deres side, ved klik på login knappen
   document.getElementById("login-btn").addEventListener("click", function () {
     // Henter brugernavnet fra input feltet
     const username = document.getElementById("username").value;
     // Hvis brugernavnet er udfyldt, sendes brugeren til deres side
     if (username) {
-      window.location.href = `/${username}`;
+      window.location.href = `/user/${username}`;
     }
   });
 

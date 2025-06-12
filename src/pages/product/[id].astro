@@ -57,31 +57,6 @@ const options = {
 const data = await fetch(url, options).then((res) => res.json());
 // Vi får et array, men der er kun ét produkt i – så vi tager det første (og eneste)
 const product = data[0];
-
-// apikey:
-// Forklaring: En slags adgangskode, der giver os lov til at hente data fra databasen.
-// Eksempel: Skal med i vores fetch-kald, ellers får vi ikke adgang.
-
-// array
-// En liste med flere ting i – fx en liste med produkter.
-// Eksempel: data = [produkt1, produkt2, produkt3].
-
-// async
-// Betyder at funktionen kan arbejde “asynkront” – altså vente på data uden at fryse alt andet.
-// Eksempel: Bruges sammen med await.
-
-// async
-// Betyder at funktionen kan arbejde “asynkront” – altså vente på data uden at fryse alt andet.
-// Eksempel: Bruges sammen med await.
-
-// Astro.params
-// Giver adgang til den værdi, der står i URL’en – fx produktets ID.
-// Eksempel: På /produkt/3 er Astro.params.id = 3.
-// Params Betyder “parametre” – altså værdier fra URL’en.
-
-// getStaticPaths()
-// En Astro-funktion, der bygger statiske sider for hver produkt-id.
-// Eksempel: Bruges til at lave sider som /produkt/1, /produkt/2 osv.
 ---
 
 <head>
@@ -171,104 +146,129 @@ const product = data[0];
 
     <Footer />
   </main>
+</Layout>
 
-  <style>
+<style>
+  a {
+    text-decoration: none;
+    color: var(--background-color);
+    background-color: var(--green-color);
+    padding: 5px 7px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  main {
+    margin-top: 150px;
+    max-width: 100%;
+  }
+
+  article {
+    overflow: hidden;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .icons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    align-items: start;
+    margin-left: 0;
+  }
+  .icons div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .icons img {
+    width: 15%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+  }
+
+  .icons p {
+    display: flex;
+    align-items: center;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  h1 {
+    text-align: center;
+  }
+  .left {
+    height: 50%;
+    max-width: 100%;
+  }
+
+  .right {
+    margin-left: 30px;
+  }
+  @media (min-width: 768px) {
     a {
-      text-decoration: none;
-      color: var(--background-color);
-      background-color: var(--green-color);
-      padding: 5px 7px;
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
-
-    main {
-      margin-top: 150px;
-      max-width: 100%;
+      font-size: 18px;
+      padding: 10px 10px;
     }
 
     article {
       overflow: hidden;
     }
 
-    .hide {
-      display: none;
+    .grid_1-1 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
-
+    h1 {
+      grid-column: 2 / span 1;
+      text-align: left;
+    }
     .icons {
       display: flex;
-      flex-direction: column;
-      margin-bottom: 25px;
-      align-items: start;
-      margin-left: 0;
-    }
-    .icons div {
-      display: flex;
       flex-direction: row;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
+      justify-content: flex-start;
+      gap: 4vw;
+      margin-right: auto;
     }
 
     .icons img {
-      width: 15%;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
+      width: 4vw;
+      object-fit: contain;
     }
+  }
+</style>
 
-    .icons p {
-      display: flex;
-      align-items: center;
-    }
+<!-- apikey: 
+// Forklaring: En slags adgangskode, der giver os lov til at hente data fra databasen.
+// Eksempel: Skal med i vores fetch-kald, ellers får vi ikke adgang.
 
-    .cta-row {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .left {
-      height: 50%;
-      max-width: 100%;
-    }
+// array
+// En liste med flere ting i – fx en liste med produkter.
+// Eksempel: data = [produkt1, produkt2, produkt3].
 
-    .right {
-      margin-left: 30px;
-    }
-    @media (min-width: 768px) {
-      a {
-        font-size: 18px;
-        padding: 10px 10px;
-      }
+// async
+// Betyder at funktionen kan arbejde “asynkront” – altså vente på data uden at fryse alt andet.
+// Eksempel: Bruges sammen med await.
 
-      article {
-        overflow: hidden;
-      }
+// async
+// Betyder at funktionen kan arbejde “asynkront” – altså vente på data uden at fryse alt andet.
+// Eksempel: Bruges sammen med await.
 
-      .grid_1-1 {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-      h1 {
-        grid-column: 2 / span 1;
-        text-align: left;
-      }
-      .icons {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: 4vw;
-        margin-right: auto;
-      }
+// Astro.params
+// Giver adgang til den værdi, der står i URL’en – fx produktets ID.
+// Eksempel: På /produkt/3 er Astro.params.id = 3.
+// Params Betyder “parametre” – altså værdier fra URL’en.
 
-      .icons img {
-        width: 4vw;
-        object-fit: contain;
-      }
-    }
-  </style>
-</Layout>
+// getStaticPaths()
+// En Astro-funktion, der bygger statiske sider for hver produkt-id.
+// Eksempel: Bruges til at lave sider som /produkt/1, /produkt/2 osv.-->
