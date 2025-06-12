@@ -1,8 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import MenuBlack from "../components/menublack.astro";
-import CTA from "../components/SquareCTA2.astro";
-import Footer from "../components/footer.astro";
+import Layout from "../../layouts/Layout.astro";
+import MenuBlack from "../../components/menublack.astro";
+import CTA from "../../components/SquareCTA2.astro";
+import Footer from "../../components/footer.astro";
 
 // Bruger getStaticPaths til at generere statiske ruter for hver bruger.
 export async function getStaticPaths() {
@@ -19,6 +19,8 @@ export async function getStaticPaths() {
 // Jeg har lavet et simpelt arrey med brugere, som indeholder deres oplysninger.
 const { username } = Astro.params;
 
+// Dette er er arrey af brugere, hvor hver bruger er et objekt med forskellige egenskaber.
+// username, fullname, mm er nøgler og Per, Per Hansen osv. er værdierne i objekterne.
 const users = [
   {
     username: "Per",
@@ -128,10 +130,9 @@ const users = [
   },
 ];
 
-// Find bruger hvor fornavn matcher (case-insensitive)
-const user = users.find(
-  (u) => u.username.toLowerCase() === username.toLowerCase()
-);
+// Find bruger hvor fornavn matcher
+// Den leder i arrayet users efter en bruger med det angivne brugernavn og returnerer brugeren hvis den findes.
+const user = users.find((u) => u.username === username);
 ---
 
 <Layout>
@@ -358,22 +359,24 @@ const user = users.find(
 
 <script is:inline>
   window.addEventListener("DOMContentLoaded", () => {
+    // Henter elementer via deres id'er - diffinere variabler for at kunne bruge dem senere
     const cancel = document.getElementById("cancel-supscription");
-    const popup = document.getElementById("cancel-popup");
+    const cancelpopup = document.getElementById("cancel-popup");
     const close = document.getElementById("close-popup");
     const confirm = document.getElementById("confirm-cancel");
 
-    // fjern hide klasse når brugeren klikker på "Annuller abonnement"
-    if (cancel && popup) {
+    // if statement
+    // Hvis annuller abonnement knappen trykkes, så vis popup ved at fjerne hide klassen
+    if (cancel && cancelpopup) {
       cancel.addEventListener("click", () => {
-        popup.classList.remove("hide");
+        cancelpopup.classList.remove("hide");
       });
     }
 
     // tilføj hide klasse når brugeren klikker på "Bekræft"
     if (confirm) {
       confirm.addEventListener("click", () => {
-        popup.classList.add("hide");
+        cancelpopup.classList.add("hide");
 
         // sender en besked til brugeren om annullering
         alert("Dit abonnement er blevet annulleret.");
@@ -383,7 +386,7 @@ const user = users.find(
     // tilføj hide klasse når brugeren klikker på "Fortryd"
     if (close) {
       close.addEventListener("click", () => {
-        popup.classList.add("hide");
+        cancelpopup.classList.add("hide");
       });
     }
   });
